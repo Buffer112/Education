@@ -109,9 +109,9 @@ void daemonize(const char *cmd)
         perror("Невозможно назначить корневой каталог текущим рабочим каталогом!\n");
     printf("5.Назначили корневой каталог текущим рабочим каталогом.\n");
     // 6. Зактрыть все файловые дескрипторы
-//    if (rl.rlim_max == RLIM_INFINITY)
-//        rl.rlim_max = 1024;
-    for (int i = 0; i < rl.rlim_max; i++)
+    if (rl.rlim_max == RLIM_INFINITY)
+        rl.rlim_max = 1024;
+    for (int i = 0; i < 5; i++)
     {
         printf("%d\n", i);
         close(i);
@@ -126,8 +126,9 @@ void daemonize(const char *cmd)
     openlog(cmd, LOG_CONS, LOG_DAEMON);
     if (fd0 != 0 || fd1 != 1 || fd2 != 2)
     {
+        printf("ошибочные файловые дескрипторы %d %d %d\n", fd0, fd1, fd2);
         syslog(LOG_ERR, "ошибочные файловые дескрипторы %d %d %d\n", fd0, fd1, fd2);
-        exit(1);
+        //exit(1);
     }
     syslog(LOG_WARNING, "Демон запущен!");
     printf("8.Инициализировали файл журнала.\n");
@@ -136,17 +137,18 @@ void daemonize(const char *cmd)
 int main()
 {
     daemonize("aaaaaaaaaa");
-    printf("Demonise initialisaion!\n");
     // 9. Блокировка файла для одной существующей копии демона
-    if (already_running() != 0)
-    {
-        syslog(LOG_ERR, "Демон уже запущен!\n");
-        exit(1);
-    }
-    syslog(LOG_WARNING, "Проверка пройдена!");
-    while(1)
-    {
-        syslog(LOG_INFO, "••Демон••!");
-        sleep(5);
-    }
+//    if (already_running() != 0)
+//    {
+//        syslog(LOG_ERR, "Демон уже запущен!\n");
+//        exit(1);
+//    }
+    //syslog(LOG_WARNING, "Проверка пройдена!");
+    printf("Demonise initialisaion!\n");
+//    while(5 > 4)
+//    {
+//        printf("Itarate demonise.");
+//        syslog(LOG_INFO, "••Демон••!");
+//        sleep(5);
+//    }
 }

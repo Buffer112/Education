@@ -26,33 +26,28 @@ int lockfile(int fd)
 
 int already_running(void)
 {
-
     syslog(LOG_ERR, "Проверка на многократный запуск!");
-
     int fd;
     char buf[16];
-
     fd = open(LOCKFILE, O_RDWR | O_CREAT, LOCKMODE);
-
     if (fd < 0)
     {
         syslog(LOG_ERR, "невозможно открыть %s: %s!", LOCKFILE, strerror(errno));
         exit(1);
     }
-
     syslog(LOG_WARNING, "Lock-файл открыт!");
 
-    // if (lockfile(fd) < 0)
-    // {
-    //     if (errno == EACCES || errno == EAGAIN)
-    //     {
-    //         close(fd);
-    //         exit(1);
-    //     }
+     if (lockfile(fd) < 0)
+     {
+         if (errno == EACCES || errno == EAGAIN)
+         {
+             close(fd);
+             exit(1);
+         }
 
-    //     syslog(LOG_ERR, "невозможно установить блокировку на %s: %s!\n", LOCKFILE, strerror(errno));
-    //     exit(1);
-    // }
+         syslog(LOG_ERR, "невозможно установить блокировку на %s: %s!\n", LOCKFILE, strerror(errno));
+         exit(1);
+     }
     flock(fd, LOCK_EX | LOCK_UN);
     if (errno == EWOULDBLOCK) {
         syslog(LOG_ERR, "невозможно установить блокировку на %s: %s!", LOCKFILE, strerror(errno));
@@ -109,9 +104,9 @@ void daemonize(const char *cmd)
         perror("Невозможно назначить корневой каталог текущим рабочим каталогом!\n");
     printf("5.Назначили корневой каталог текущим рабочим каталогом.\n");
     // 6. Зактрыть все файловые дескрипторы
-    if (rl.rlim_max == RLIM_INFINITY)
-        rl.rlim_max = 1024;
-    for (int i = 0; i < 5; i++)
+//    if (rl.rlim_max == RLIM_INFINITY)
+//        rl.rlim_max = 1024;
+    for (int i = 0; i < rl.rlim_max; i++)
     {
         printf("%d\n", i);
         close(i);
@@ -133,8 +128,7 @@ void daemonize(const char *cmd)
     syslog(LOG_WARNING, "Демон запущен!");
     printf("8.Инициализировали файл журнала.\n");
 }
-
-int main()
+void daemonize_init()
 {
     daemonize("aaaaaaaaaa");
     // 9. Блокировка файла для одной существующей копии демона
@@ -145,10 +139,24 @@ int main()
 //    }
     //syslog(LOG_WARNING, "Проверка пройдена!");
     printf("Demonise initialisaion!\n");
-//    while(5 > 4)
-//    {
-//        printf("Itarate demonise.");
-//        syslog(LOG_INFO, "••Демон••!");
-//        sleep(5);
-//    }
+    while(5 > 4)
+    {
+        printf("Itarate demonise.");
+        syslog(LOG_INFO, "••Демон••!");
+        sleep(5);
+    }
+}
+int main()
+{
+    //daemonize_init();
+    int a = 6;
+    int *b;
+    int *c;
+    b = &a;
+    c = &a;
+    printf("%d\n", &*b);
+    a = 10;
+    printf("%d\n", &*c);
+    printf("%d\n", &a);
+    return 1;
 }

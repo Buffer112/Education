@@ -131,13 +131,13 @@ void daemonize(const char *cmd)
 void daemonize_init()
 {
     daemonize("aaaaaaaaaa");
-    // 9. Блокировка файла для одной существующей копии демона
+//    //9. Блокировка файла для одной существующей копии демона
 //    if (already_running() != 0)
 //    {
 //        syslog(LOG_ERR, "Демон уже запущен!\n");
 //        exit(1);
 //    }
-    //syslog(LOG_WARNING, "Проверка пройдена!");
+//    syslog(LOG_WARNING, "Проверка пройдена!");
     printf("Demonise initialisaion!\n");
     while(5 > 4)
     {
@@ -148,15 +148,6 @@ void daemonize_init()
 }
 int main()
 {
-    //daemonize_init();
-    int a = 6;
-    int *b;
-    int *c;
-    b = &a;
-    c = &a;
-    printf("%d\n", &*b);
-    a = 10;
-    printf("%d\n", &*c);
-    printf("%d\n", &a);
+    daemonize_init();
     return 1;
 }

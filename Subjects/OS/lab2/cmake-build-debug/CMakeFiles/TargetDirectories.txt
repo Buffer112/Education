@@ -1,0 +1,3 @@
+/home/buffer112/Documents/GitHub/Education/Subjects/OS/lab2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/buffer112/Documents/GitHub/Education/Subjects/OS/lab2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/buffer112/Documents/GitHub/Education/Subjects/OS/lab2/cmake-build-debug/CMakeFiles/lab2.dir

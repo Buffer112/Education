@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/buffer112/Documents/GitHub/Education/Subjects/OS/lab2/main.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+sys/stat.h
+-
+dirent.h
+-
+limits.h
+-
+unistd.h
+-
+stack.h
+/home/buffer112/Documents/GitHub/Education/Subjects/OS/lab2/stack.h
+
+/home/buffer112/Documents/GitHub/Education/Subjects/OS/lab2/stack.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+limits.h
+-
+stack.h
+/home/buffer112/Documents/GitHub/Education/Subjects/OS/lab2/stack.h
+
+/home/buffer112/Documents/GitHub/Education/Subjects/OS/lab2/stack.h
+

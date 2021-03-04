@@ -1,6 +1,4 @@
 import kotlin.*
-import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 
 class User(ip : Int, timeSleep : Long) : Client(ip, timeSleep) {
 
